@@ -19,6 +19,7 @@ public class Main {
 			int input = in.nextInt();
 			switch (input) {
 			case 0:
+				in.close();
 				System.exit(0);
 			case 1: 
 				System.out.println("Adding record");
