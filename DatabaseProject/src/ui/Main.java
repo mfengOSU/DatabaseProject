@@ -36,6 +36,9 @@ public class Main {
 			case 5:
 				System.out.println("Getting report");
 				break;
+			default:
+				System.out.println("Invalid Input");
+				break;
 			}
 			System.out.println("Choose an option");
 			System.out.println("0 - Exit");
