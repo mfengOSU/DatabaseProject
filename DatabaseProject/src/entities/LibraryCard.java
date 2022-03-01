@@ -3,7 +3,7 @@ package entities;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class LibraryCard {
-	private static final AtomicLong NEXT_NUMBER = new AtomicLong(0); 
+	private static final AtomicLong NEXT_NUMBER = new AtomicLong(100); 
 	private final long number;
 	private boolean isActive;
 	
