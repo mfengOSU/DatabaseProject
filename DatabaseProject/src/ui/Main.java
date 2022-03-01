@@ -1,10 +1,26 @@
 package ui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import entities.Librarian;
+import entities.Library;
+import entities.LibraryCard;
 
 public class Main {
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
+		
+		List<Library> libraries = new ArrayList<>();
+		Library library1 = new Library("Columbus", "Ohio");
+		libraries.add(library1);
+		
+		List<Librarian> librarians = new ArrayList<>();
+		Librarian librarian1 = new Librarian("Jane Doe", 100.00, library1);
+		librarians.add(librarian1);
+		
+		LibraryCard libraryCard1 = new LibraryCard();
 		
 		System.out.println("Library Application");
 		System.out.println("Choose an option");
@@ -47,8 +63,7 @@ public class Main {
 			System.out.println("3 - Search for a record");
 			System.out.println("4 - Order an item");
 			System.out.println("5 - Generate reports");
-		}
-
-		
+		}	
 	}
+	
 }
