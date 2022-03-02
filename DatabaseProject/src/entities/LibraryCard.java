@@ -10,4 +10,11 @@ public class LibraryCard {
 		number = n;
 		status = s;
 	}
+
+	@Override
+	public String toString() {
+		return "LibraryCard [number=" + number + ", status=" + status + "]";
+	}
+	
+	
 }

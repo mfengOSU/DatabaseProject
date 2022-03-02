@@ -19,4 +19,10 @@ public class Order {
     	price = (double) list.get(4);
     }
 
+	@Override
+	public String toString() {
+		return "Order [orderNum=" + orderNum + ", mediaType=" + mediaType + ", copies=" + copies + ", date=" + date
+				+ ", price=" + price + "]";
+	}
+
 }

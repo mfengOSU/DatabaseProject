@@ -11,4 +11,9 @@ public class Author {
 		authorName = n;
 		authorId = id;
 	}
+	
+	@Override
+	public String toString() {
+		return "Author [authorName=" + authorName + ", authorId=" + authorId + "]";
+	}
 }

@@ -15,4 +15,9 @@ public class Librarian {
         salary = (double)list.get(2);
     }
 
+	@Override
+	public String toString() {
+		return "Librarian [librarianNum=" + librarianNum + ", name=" + name + ", salary=" + salary + "]";
+	}
+
 }

@@ -19,6 +19,13 @@ public class Main {
 		System.out.println("3 - Search for a record");
 		System.out.println("4 - Order an item");
 		System.out.println("5 - Generate reports");
+		
+		List<Album> albums = new ArrayList<>();
+		List<Audiobook> books = new ArrayList<>();
+		List<Movie> movies = new ArrayList<>();
+		List<Order> orders = new ArrayList<>();
+		List<Patron> patrons = new ArrayList<>();
+		List<Librarian> librarians = new ArrayList<>();
 
 		while (true) {
 			int input = in.nextInt();
@@ -29,7 +36,7 @@ public class Main {
 				in.close();
 				System.exit(0);
 			case 1: 
-				int recordNum = recordInputOptions(in);
+				int recordNum = recordInputOptions(in, "Please choose a record to add: ");
 				List<Object> list = new ArrayList<Object> ();
 
 				switch(recordNum){
@@ -38,66 +45,61 @@ public class Main {
 						list = itemAttributes(in, list);
 						list = albumAttributes(in, list);
 						Album album = new Album(list);
-
+						albums.add(album);
 						break;
 					case 2:
 						System.out.println();
 						list = itemAttributes(in, list);
 						list = bookAttributes(in, list);
 						Audiobook book  = new Audiobook(list);
-						
+						books.add(book);
 						break;
 					case 3:
 						System.out.println();
 						list = itemAttributes(in, list);
 						list = movieAttributes(in, list);
 						Movie movie  = new Movie(list);
-
+						movies.add(movie);
 						break;
 					case 4:
 						System.out.println();
-						list = orderAttributes(in, list);
-						Order order  = new Order(list);
-		
+						list = patronAttributes(in, list);
+						Patron patron  = new Patron(list);
+						patrons.add(patron);
 						break;
 					case 5:
 						System.out.println();
-						list = patronAttributes(in, list);
-						Patron patron  = new Patron(list);
-
-						break;
-					case 6:
-						System.out.println();
 						list = librarianAttributes(in, list);
 						Librarian librarian  = new Librarian(list);
-				
+						librarians.add(librarian);
 						break;
 					default:
 						System.out.println("Invalid Input");
 						break;
 				}
-				
-
 				break;
 			case 2:
 				System.out.println("Editing record");
 				break;
 			case 3:
-				System.out.println("Choose what to search for: ");
-				System.out.println("M - Search for movie");
-				System.out.println("A - Search for album");
-				System.out.println("B - Search for audiobook");
-				String choice3 = in.nextLine();
+				recordNum = recordInputOptions(in, "Please choose a record to search for: ");
+
 				
-				switch (choice3.toLowerCase()) {
-				case "m":
-					//searchMovie(in, movies);
+				switch (recordNum) {
+				case 1:
+					SearchRecords.searchMovie(in, movies);
 					break;
-				case "a":
-					//searchAlbum(in, albums);
+				case 2:
+					SearchRecords.searchAlbum(in, albums);
 					break;
-				case "b":
-					//searchAudiobook(in, audiobooks);
+				case 3:
+					SearchRecords.searchAudiobook(in, books);
+					break;
+				case 4:
+					SearchRecords.searchPatron(in, patrons);
+					break;
+				case 5:
+					SearchRecords.searchLibrarian(in, librarians);
 					break;
 				default:
 					System.out.println("Invalid input");
@@ -105,7 +107,11 @@ public class Main {
 				}
 				break;
 			case 4:
-				System.out.println("Ordering an item");
+				List<Object> list4 = new ArrayList<Object> ();
+				System.out.println();
+				list = orderAttributes(in, list4);
+				Order order  = new Order(list4);
+				orders.add(order);
 				break;
 			case 5:
 				System.out.println("Getting report");
@@ -125,69 +131,18 @@ public class Main {
 		}	
 	}
 
-	public static void searchMovie(Scanner in, List<Movie> records) {
-//		System.out.println("Input movie title to search for");
-//		String movieInput = in.nextLine();
-//		
-//		for (Movie item : records) {
-//				if (item.getTitle().equalsIgnoreCase(movieInput)) {
-//					System.out.println("Movie found: " + (Movie)item);
-//					return;
-//				}
-//				
-//			}
-//		}
-//		
-//		System.out.println("No movie found with title " + movieInput);
-	}
-	
-	private static void searchAlbum(Scanner in, List<Album> records) {
-//		System.out.println("Input album title to search for");
-//		String input = in.nextLine();
-//		
-//		for (Album item : records) {
-//				if (item.getTitle().equalsIgnoreCase(input)) {
-//					System.out.println("Album found: " + (Album)item);
-//					return;
-//				}
-//				
-//			}
-//		}
-//		
-//		System.out.println("No album found with title " + input);
-
-	}
-	
-
-	private static void searchAudiobook(Scanner in, List<Audiobook> records) {
-//		System.out.println("Input Audiobook title to search for");
-//		String input = in.nextLine();
-//		
-//		for (Audiobook item : records) {
-//				if (item.getTitle().equalsIgnoreCase(input)) {
-//					System.out.println("Audiobook found: " + (Audiobook)item);
-//					return;
-//				}
-//				
-//			}
-//		}
-//		
-//		System.out.println("No Audiobook found with title " + input);
-		
-	}
-
-	public static int recordInputOptions(Scanner in)
+	public static int recordInputOptions(Scanner in, String text)
 	{
 		System.out.println();
 		System.out.println("Record Input Options:");
 		System.out.println("1 - Album");
 		System.out.println("2 - Audiobook");
 		System.out.println("3 - Movie");
-		System.out.println("4 - Order");
-		System.out.println("5 - Patron");
-		System.out.println("6 - Librarian");
-		System.out.print("Please choose a record to add: ");
+		System.out.println("4 - Patron");
+		System.out.println("5 - Librarian");
+		System.out.print(text);
 		int recordNum = in.nextInt();
+		in.nextLine();
 		System.out.println();
 
 		return recordNum;
@@ -195,8 +150,6 @@ public class Main {
 
 	public static List<Object> itemAttributes(Scanner in, List<Object> list)
 	{
-		in.nextLine();
-
 		System.out.print("Item Number: ");
 		list.add(Integer.valueOf(in.nextInt()));
 		System.out.println();

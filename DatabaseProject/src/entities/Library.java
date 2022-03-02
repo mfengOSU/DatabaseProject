@@ -23,6 +23,13 @@ public class Library {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	@Override
+	public String toString() {
+		return "Library [state=" + state + ", city=" + city + "]";
 	}	
+	
+	
 	
 }

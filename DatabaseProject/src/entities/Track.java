@@ -11,4 +11,9 @@ public class Track {
 		tracklength = l;
 	}
 
+	@Override
+	public String toString() {
+		return "Track [trackName=" + trackName + ", tracklength=" + tracklength + "]";
+	}
+
 }

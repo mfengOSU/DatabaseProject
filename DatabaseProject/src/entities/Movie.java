@@ -33,4 +33,11 @@ public class Movie {
         actor = new Actor(list.get(10).toString(), (int) list.get(11));
     }
 
+	@Override
+	public String toString() {
+		return "Movie [itemNum=" + itemNum + ", itemStatus=" + itemStatus + ", type=" + type + ", title=" + title
+				+ ", year=" + year + ", genre=" + genre + ", location=" + location + ", rating=" + rating
+				+ ", directorName=" + directorName + ", movieLength=" + movieLength + ", actor=" + actor + "]";
+	}
+
 }

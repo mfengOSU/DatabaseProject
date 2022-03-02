@@ -32,4 +32,12 @@ public class Album {
         
     }
 
+	@Override
+	public String toString() {
+		return "Album [itemNum=" + itemNum + ", itemStatus=" + itemStatus + ", type=" + type + ", title=" + title
+				+ ", year=" + year + ", genre=" + genre + ", location=" + location + ", rating=" + rating + ", artist="
+				+ artist + ", track=" + track + "]";
+	}
+    
+
 }

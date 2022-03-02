@@ -35,4 +35,12 @@ public class Audiobook {
         narrator = new Narrator(list.get(12).toString(), (int) list.get(13));
     }
 
+	@Override
+	public String toString() {
+		return "Audiobook [itemNum=" + itemNum + ", itemStatus=" + itemStatus + ", type=" + type + ", title=" + title
+				+ ", year=" + year + ", genre=" + genre + ", location=" + location + ", rating=" + rating
+				+ ", chapters=" + chapters + ", pages=" + pages + ", author=" + author + ", narrator=" + narrator + "]";
+	}
+    
+
 }
