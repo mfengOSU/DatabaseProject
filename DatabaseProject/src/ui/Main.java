@@ -7,10 +7,19 @@ import entities.*;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Main {
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
+		
+		int recordNum;
+		Map<Integer, Object> albums = new HashMap<Integer, Object>();
+		Map<Integer, Object> audiobooks = new HashMap<Integer, Object>();
+		Map<Integer, Object> movies = new HashMap<Integer, Object>();
+		Map<Integer, Object> orders = new HashMap<Integer, Object>();
+		Map<Integer, Object> patrons = new HashMap<Integer, Object>();
+		Map<Integer, Object> librarians = new HashMap<Integer, Object>();
 		
 		System.out.println("Library Application");
 		System.out.println("Choose an option");
@@ -29,7 +38,7 @@ public class Main {
 				System.exit(0);
 			case 1: 
 
-				int recordNum = recordInputOptions(in);
+				recordNum = recordOptions(in);
 				List<Object> list = new ArrayList<Object> ();
 
 				switch(recordNum){
@@ -38,39 +47,39 @@ public class Main {
 						list = itemAttributes(in, list);
 						list = albumAttributes(in, list);
 						Album album = new Album(list);
-
+						albums.put(album.itemNum, album);
 						break;
 					case 2:
 						System.out.println();
 						list = itemAttributes(in, list);
 						list = bookAttributes(in, list);
 						Audiobook book  = new Audiobook(list);
-						
+						audiobooks.put(book.itemNum, book);
 						break;
 					case 3:
 						System.out.println();
 						list = itemAttributes(in, list);
 						list = movieAttributes(in, list);
 						Movie movie  = new Movie(list);
-
+						movies.put(movie.itemNum, movie);
 						break;
 					case 4:
 						System.out.println();
 						list = orderAttributes(in, list);
 						Order order  = new Order(list);
-		
+						orders.put(order.orderNum, order);
 						break;
 					case 5:
 						System.out.println();
 						list = patronAttributes(in, list);
 						Patron patron  = new Patron(list);
-
+						patrons.put(patron.patronNum, patron);
 						break;
 					case 6:
 						System.out.println();
 						list = librarianAttributes(in, list);
 						Librarian librarian  = new Librarian(list);
-				
+						librarians.put(librarian.librarianNum, librarian);
 						break;
 					default:
 						System.out.println("Invalid Input");
@@ -80,7 +89,69 @@ public class Main {
 
 				break;
 			case 2:
-				System.out.println("Editing record");
+				recordNum = recordOptions(in);
+				Integer id;
+				String attr;
+				
+				switch(recordNum)
+				{
+					case 1:
+						System.out.println();
+						System.out.print("Please enter an item number: ");
+						id = Integer.valueOf(in.nextInt());
+						System.out.println();
+						in.nextLine();
+						
+						System.out.print("Please enter attribute to edit: ");
+						attr = in.nextLine();
+						
+						albums.get(id);
+						break;
+					case 2:
+						System.out.println();
+						System.out.print("Please enter an item number: ");
+						id = Integer.valueOf(in.nextInt());
+						System.out.println();
+						in.nextLine();
+						
+						break;
+					case 3:
+						System.out.println();
+						System.out.print("Please enter an item number: ");
+						id = Integer.valueOf(in.nextInt());
+						System.out.println();
+						in.nextLine();
+						
+						break;
+					case 4:
+						System.out.println();
+						System.out.print("Please enter an order number: ");
+						id = Integer.valueOf(in.nextInt());
+						System.out.println();
+						in.nextLine();
+						
+						break;
+					case 5:
+						System.out.println();
+						System.out.print("Please enter an patron number: ");
+						id = Integer.valueOf(in.nextInt());
+						System.out.println();
+						in.nextLine();
+						
+						break;
+					case 6:
+						System.out.println();
+						System.out.print("Please enter an librarian number: ");
+						id = Integer.valueOf(in.nextInt());
+						System.out.println();
+						in.nextLine();
+						
+						break;
+					default:
+						System.out.println("Invalid Input");
+						break;
+				}
+				
 				break;
 			case 3:
 				System.out.println("Looking for record");
@@ -107,17 +178,17 @@ public class Main {
 		
 	}
 
-	public static int recordInputOptions(Scanner in)
+	public static int recordOptions(Scanner in)
 	{
 		System.out.println();
-		System.out.println("Record Input Options:");
+		System.out.println("Record Options:");
 		System.out.println("1 - Album");
 		System.out.println("2 - Audiobook");
 		System.out.println("3 - Movie");
 		System.out.println("4 - Order");
 		System.out.println("5 - Patron");
 		System.out.println("6 - Librarian");
-		System.out.print("Please choose a record to add: ");
+		System.out.print("Please choose a record: ");
 		int recordNum = in.nextInt();
 		System.out.println();
 
