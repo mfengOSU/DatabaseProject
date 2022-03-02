@@ -65,17 +65,11 @@ public class Main {
 					break;
 				case 4:
 					System.out.println();
-					list = orderAttributes(in, list);
-					Order order  = new Order(list);
-					orders.put(order.orderNum, order);
-					break;
-				case 5:
-					System.out.println();
 					list = patronAttributes(in, list);
 					Patron patron  = new Patron(list);
 					patrons.put(patron.patronNum, patron);
 					break;
-				case 6:
+				case 5:
 					System.out.println();
 					list = librarianAttributes(in, list);
 					Librarian librarian  = new Librarian(list);
