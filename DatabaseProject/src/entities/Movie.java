@@ -19,6 +19,10 @@ public class Movie {
 	
     public Movie(List<Object> list)
     {
+    	init(list);
+    }
+    
+    public void init(List<Object> list) {
     	itemNum = (int) list.get(0);
         itemStatus = list.get(1).toString();
         type = list.get(2).toString();

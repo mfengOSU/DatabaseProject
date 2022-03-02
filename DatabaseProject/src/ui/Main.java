@@ -79,7 +79,56 @@ public class Main {
 				}
 				break;
 			case 2:
-				System.out.println("Editing record");
+				List<Object> list2 = new ArrayList<Object> ();
+				recordNum = recordInputOptions(in, "Please choose a record to edit: ");
+				switch (recordNum) {
+				case 1:
+					Album album = SearchRecords.searchAlbum(in, albums);
+					if (album != null) {
+						System.out.println();
+						list2 = itemAttributes(in, list2);
+						list2 = albumAttributes(in, list2);
+						album.init(list2);
+					}
+					break;
+				case 2:
+					Audiobook book = SearchRecords.searchAudiobook(in, books);
+					if (book != null) {
+						System.out.println();
+						list2 = itemAttributes(in, list2);
+						list2 = bookAttributes(in, list2);
+						book.init(list2);
+					}
+					break;
+				case 3:
+					Movie movie = SearchRecords.searchMovie(in, movies);
+					if (movie != null) {
+						System.out.println();
+						list2 = itemAttributes(in, list2);
+						list2 = movieAttributes(in, list2);
+						movie.init(list2);
+					}
+					break;
+				case 4:
+					Patron patron = SearchRecords.searchPatron(in, patrons);
+					if (patron != null) {
+						System.out.println();
+						list2 = patronAttributes(in, list2);
+						patron.init(list2);
+					}
+					break;
+				case 5:
+					Librarian librarian = SearchRecords.searchLibrarian(in, librarians);
+					if (librarian != null) {
+						System.out.println();
+						list2 = librarianAttributes(in, list2);
+						librarian.init(list2);
+					}
+					break;
+				default:
+					System.out.println("Invalid input");
+					break;
+				}
 				break;
 			case 3:
 				recordNum = recordInputOptions(in, "Please choose a record to search for: ");
@@ -87,13 +136,13 @@ public class Main {
 				
 				switch (recordNum) {
 				case 1:
-					SearchRecords.searchMovie(in, movies);
-					break;
-				case 2:
 					SearchRecords.searchAlbum(in, albums);
 					break;
-				case 3:
+				case 2:
 					SearchRecords.searchAudiobook(in, books);
+					break;
+				case 3:
+					SearchRecords.searchMovie(in, movies);
 					break;
 				case 4:
 					SearchRecords.searchPatron(in, patrons);

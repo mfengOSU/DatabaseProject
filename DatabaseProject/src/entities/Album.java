@@ -18,7 +18,12 @@ public class Album {
 	
     public Album(List<Object> list)
     {
-        itemNum = (int) list.get(0);
+        init(list);
+        
+    }
+
+	public void init(List<Object> list) {
+		itemNum = (int) list.get(0);
         itemStatus = list.get(1).toString();
         type = list.get(2).toString();
         title = list.get(3).toString();
@@ -29,8 +34,7 @@ public class Album {
         
         artist = new Artist(list.get(8).toString(), (int)list.get(9));
         track = new Track(list.get(10).toString(), (double)list.get(11));
-        
-    }
+	}
 
 	@Override
 	public String toString() {

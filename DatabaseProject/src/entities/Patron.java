@@ -13,7 +13,11 @@ public class Patron {
 	
 	public Patron(List<Object> list)
 	{
-	    patronNum = (int) list.get(0);
+	    init(list);
+	}
+
+	public void init(List<Object> list) {
+		patronNum = (int) list.get(0);
 	    firstName = list.get(1).toString();
 	    lastName = list.get(2).toString();
 	    address = list.get(3).toString();
