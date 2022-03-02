@@ -1,5 +1,6 @@
 package entities;
 
+
 public class Author {
 
 	public String authorName;
@@ -9,5 +10,10 @@ public class Author {
 	{
 		authorName = n;
 		authorId = id;
+	}
+	
+	@Override
+	public String toString() {
+		return "Author [authorName=" + authorName + ", authorId=" + authorId + "]";
 	}
 }

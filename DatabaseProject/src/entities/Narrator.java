@@ -10,4 +10,10 @@ public class Narrator {
 		narratorName = n;
 		narratorId = id;
 	}
+
+	@Override
+	public String toString() {
+		return "Narrator [narratorName=" + narratorName + ", narratorId=" + narratorId + "]";
+	}
+	
 }

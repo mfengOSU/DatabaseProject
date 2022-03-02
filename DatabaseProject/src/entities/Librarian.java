@@ -10,9 +10,18 @@ public class Librarian {
 	
 	public Librarian(List<Object> list)
     {
-        librarianNum = (int)list.get(0);
+        init(list);
+    }
+
+	public void init(List<Object> list) {
+		librarianNum = (int)list.get(0);
         name = list.get(1).toString();
         salary = (double)list.get(2);
-    }
+	}
+
+	@Override
+	public String toString() {
+		return "Librarian [librarianNum=" + librarianNum + ", name=" + name + ", salary=" + salary + "]";
+	}
 
 }

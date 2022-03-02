@@ -1,5 +1,6 @@
 package entities;
 
+
 public class Artist {
 
 	public String artistName;
@@ -10,4 +11,10 @@ public class Artist {
 		artistName = n;
 		artistId = id;
 	}
+
+	@Override
+	public String toString() {
+		return "Artist [artistName=" + artistName + ", artistId=" + artistId + "]";
+	}
+	
 }

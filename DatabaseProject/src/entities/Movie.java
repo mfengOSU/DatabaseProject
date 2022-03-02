@@ -19,6 +19,10 @@ public class Movie {
 	
     public Movie(List<Object> list)
     {
+    	init(list);
+    }
+    
+    public void init(List<Object> list) {
     	itemNum = (int) list.get(0);
         itemStatus = list.get(1).toString();
         type = list.get(2).toString();
@@ -32,5 +36,12 @@ public class Movie {
         movieLength = (double) list.get(9);
         actor = new Actor(list.get(10).toString(), (int) list.get(11));
     }
+
+	@Override
+	public String toString() {
+		return "Movie [itemNum=" + itemNum + ", itemStatus=" + itemStatus + ", type=" + type + ", title=" + title
+				+ ", year=" + year + ", genre=" + genre + ", location=" + location + ", rating=" + rating
+				+ ", directorName=" + directorName + ", movieLength=" + movieLength + ", actor=" + actor + "]";
+	}
 
 }

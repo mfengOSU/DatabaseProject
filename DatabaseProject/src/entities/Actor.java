@@ -1,5 +1,5 @@
 package entities;
-
+	
 public class Actor {
 	
 	public String actorName;
@@ -10,4 +10,10 @@ public class Actor {
 		actorName = n;
 		actorId = id;
 	}
+
+	@Override
+	public String toString() {
+		return "Actor [actorName=" + actorName + ", actorId=" + actorId + "]";
+	}
+	
 }

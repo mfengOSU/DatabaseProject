@@ -20,7 +20,11 @@ public class Audiobook {
 	
     public Audiobook(List<Object> list)
     {
-    	itemNum = (int) list.get(0);
+    	init(list);
+    }
+
+	public void init(List<Object> list) {
+		itemNum = (int) list.get(0);
         itemStatus = list.get(1).toString();
         type = list.get(2).toString();
         title = list.get(3).toString();
@@ -33,6 +37,14 @@ public class Audiobook {
         pages = (int) list.get(9);
         author = new Author(list.get(10).toString(), (int) list.get(11));
         narrator = new Narrator(list.get(12).toString(), (int) list.get(13));
-    }
+	}
+
+	@Override
+	public String toString() {
+		return "Audiobook [itemNum=" + itemNum + ", itemStatus=" + itemStatus + ", type=" + type + ", title=" + title
+				+ ", year=" + year + ", genre=" + genre + ", location=" + location + ", rating=" + rating
+				+ ", chapters=" + chapters + ", pages=" + pages + ", author=" + author + ", narrator=" + narrator + "]";
+	}
+    
 
 }

@@ -1,17 +1,16 @@
 package ui;
 
-import java.util.Scanner;
+import java.util.*;
 
 import entities.*;
 
-import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 
 public class Main {
 	public static void main(String[] args) {
-		Scanner in = new Scanner(System.in);
-		
+		Scanner in = new Scanner(System.in);		
+				
 		System.out.println("Library Application");
 		System.out.println("Choose an option");
 		System.out.println("0 - Exit");
@@ -20,16 +19,24 @@ public class Main {
 		System.out.println("3 - Search for a record");
 		System.out.println("4 - Order an item");
 		System.out.println("5 - Generate reports");
+		
+		List<Album> albums = new ArrayList<>();
+		List<Audiobook> books = new ArrayList<>();
+		List<Movie> movies = new ArrayList<>();
+		List<Order> orders = new ArrayList<>();
+		List<Patron> patrons = new ArrayList<>();
+		List<Librarian> librarians = new ArrayList<>();
 
 		while (true) {
 			int input = in.nextInt();
+			in.nextLine();
+			
 			switch (input) {
 			case 0:
 				in.close();
 				System.exit(0);
 			case 1: 
-
-				int recordNum = recordInputOptions(in);
+				int recordNum = recordInputOptions(in, "Please choose a record to add: ");
 				List<Object> list = new ArrayList<Object> ();
 
 				switch(recordNum){
@@ -38,58 +45,126 @@ public class Main {
 						list = itemAttributes(in, list);
 						list = albumAttributes(in, list);
 						Album album = new Album(list);
-
+						albums.add(album);
 						break;
 					case 2:
 						System.out.println();
 						list = itemAttributes(in, list);
 						list = bookAttributes(in, list);
 						Audiobook book  = new Audiobook(list);
-						
+						books.add(book);
 						break;
 					case 3:
 						System.out.println();
 						list = itemAttributes(in, list);
 						list = movieAttributes(in, list);
 						Movie movie  = new Movie(list);
-
+						movies.add(movie);
 						break;
 					case 4:
 						System.out.println();
-						list = orderAttributes(in, list);
-						Order order  = new Order(list);
-		
+						list = patronAttributes(in, list);
+						Patron patron  = new Patron(list);
+						patrons.add(patron);
 						break;
 					case 5:
 						System.out.println();
-						list = patronAttributes(in, list);
-						Patron patron  = new Patron(list);
-
-						break;
-					case 6:
-						System.out.println();
 						list = librarianAttributes(in, list);
 						Librarian librarian  = new Librarian(list);
-				
+						librarians.add(librarian);
 						break;
 					default:
 						System.out.println("Invalid Input");
 						break;
 				}
-				
-
 				break;
 			case 2:
-				System.out.println("Editing record");
+				List<Object> list2 = new ArrayList<Object> ();
+				recordNum = recordInputOptions(in, "Please choose a record to edit: ");
+				switch (recordNum) {
+				case 1:
+					Album album = SearchRecords.searchAlbum(in, albums);
+					if (album != null) {
+						System.out.println();
+						list2 = itemAttributes(in, list2);
+						list2 = albumAttributes(in, list2);
+						album.init(list2);
+					}
+					break;
+				case 2:
+					Audiobook book = SearchRecords.searchAudiobook(in, books);
+					if (book != null) {
+						System.out.println();
+						list2 = itemAttributes(in, list2);
+						list2 = bookAttributes(in, list2);
+						book.init(list2);
+					}
+					break;
+				case 3:
+					Movie movie = SearchRecords.searchMovie(in, movies);
+					if (movie != null) {
+						System.out.println();
+						list2 = itemAttributes(in, list2);
+						list2 = movieAttributes(in, list2);
+						movie.init(list2);
+					}
+					break;
+				case 4:
+					Patron patron = SearchRecords.searchPatron(in, patrons);
+					if (patron != null) {
+						System.out.println();
+						list2 = patronAttributes(in, list2);
+						patron.init(list2);
+					}
+					break;
+				case 5:
+					Librarian librarian = SearchRecords.searchLibrarian(in, librarians);
+					if (librarian != null) {
+						System.out.println();
+						list2 = librarianAttributes(in, list2);
+						librarian.init(list2);
+					}
+					break;
+				default:
+					System.out.println("Invalid input");
+					break;
+				}
 				break;
 			case 3:
-				System.out.println("Looking for record");
+				recordNum = recordInputOptions(in, "Please choose a record to search for: ");
+
+				
+				switch (recordNum) {
+				case 1:
+					SearchRecords.searchAlbum(in, albums);
+					break;
+				case 2:
+					SearchRecords.searchAudiobook(in, books);
+					break;
+				case 3:
+					SearchRecords.searchMovie(in, movies);
+					break;
+				case 4:
+					SearchRecords.searchPatron(in, patrons);
+					break;
+				case 5:
+					SearchRecords.searchLibrarian(in, librarians);
+					break;
+				default:
+					System.out.println("Invalid input");
+					break;
+				}
 				break;
 			case 4:
-				System.out.println("Ordering an item");
+				List<Object> list4 = new ArrayList<Object> ();
+				System.out.println();
+				list = orderAttributes(in, list4);
+				Order order  = new Order(list4);
+				orders.add(order);
 				break;
 			case 5:
 				System.out.println("Getting report");
+				// TODO
 				break;
 			default:
 				System.out.println("Invalid Input");
@@ -102,23 +177,21 @@ public class Main {
 			System.out.println("3 - Search for a record");
 			System.out.println("4 - Order an item");
 			System.out.println("5 - Generate reports");
-		}
-
-		
+		}	
 	}
 
-	public static int recordInputOptions(Scanner in)
+	public static int recordInputOptions(Scanner in, String text)
 	{
 		System.out.println();
 		System.out.println("Record Input Options:");
 		System.out.println("1 - Album");
 		System.out.println("2 - Audiobook");
 		System.out.println("3 - Movie");
-		System.out.println("4 - Order");
-		System.out.println("5 - Patron");
-		System.out.println("6 - Librarian");
-		System.out.print("Please choose a record to add: ");
+		System.out.println("4 - Patron");
+		System.out.println("5 - Librarian");
+		System.out.print(text);
 		int recordNum = in.nextInt();
+		in.nextLine();
 		System.out.println();
 
 		return recordNum;
@@ -126,8 +199,6 @@ public class Main {
 
 	public static List<Object> itemAttributes(Scanner in, List<Object> list)
 	{
-		in.nextLine();
-
 		System.out.print("Item Number: ");
 		list.add(Integer.valueOf(in.nextInt()));
 		System.out.println();
