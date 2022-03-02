@@ -1,16 +1,17 @@
 package ui;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import entities.*;
 
 public class SearchRecords {
-	public static Movie searchMovie(Scanner in, List<Movie> records) {
+	public static Movie searchMovie(Scanner in, Map<Integer, Movie> records) {
 		System.out.println("Input movie title to search for");
 		String movieInput = in.nextLine();
 		
-		for (Movie item : records) {
+		for (Movie item : records.values()) {
 				if (item.title.equalsIgnoreCase(movieInput)) {
 					System.out.println("Movie found: " + item);
 					return item;
@@ -22,11 +23,11 @@ public class SearchRecords {
 		return null;
 	}
 	
-	public static Album searchAlbum(Scanner in, List<Album> records) {
+	public static Album searchAlbum(Scanner in, Map<Integer, Album> records) {
 		System.out.println("Input album title to search for");
 		String input = in.nextLine();
 		
-		for (Album item : records) {
+		for (Album item : records.values()) {
 				if (item.title.equalsIgnoreCase(input)) {
 					System.out.println("Album found: " + item);
 					return item;
@@ -39,11 +40,11 @@ public class SearchRecords {
 	}
 	
 
-	public static Audiobook searchAudiobook(Scanner in, List<Audiobook> records) {
+	public static Audiobook searchAudiobook(Scanner in, Map<Integer, Audiobook> records) {
 		System.out.println("Input Audiobook title to search for");
 		String input = in.nextLine();
 		
-		for (Audiobook item : records) {
+		for (Audiobook item : records.values()) {
 				if (item.title.equalsIgnoreCase(input)) {
 					System.out.println("Audiobook found: " + item);
 					return item;
@@ -56,11 +57,11 @@ public class SearchRecords {
 		
 	}
 	
-	public static Patron searchPatron(Scanner in, List<Patron> records) {
+	public static Patron searchPatron(Scanner in, Map<Integer,Patron> records) {
 		System.out.println("Input Patron last name to search for");
 		String input = in.nextLine();
 		
-		for (Patron item : records) {
+		for (Patron item : records.values()) {
 				if (item.lastName.equalsIgnoreCase(input)) {
 					System.out.println("Patron found: " + item);
 					return item;
@@ -73,11 +74,11 @@ public class SearchRecords {
 		
 	}
 	
-	public static Librarian searchLibrarian(Scanner in, List<Librarian> records) {
+	public static Librarian searchLibrarian(Scanner in, Map<Integer,Librarian> records) {
 		System.out.println("Input Librarian name to search for");
 		String input = in.nextLine();
 		
-		for (Librarian item : records) {
+		for (Librarian item : records.values()) {
 				if (item.name.equalsIgnoreCase(input)) {
 					System.out.println("Librarian found: " + item);
 					return item;

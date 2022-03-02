@@ -20,12 +20,14 @@ public class Main {
 		System.out.println("4 - Order an item");
 		System.out.println("5 - Generate reports");
 		
-		List<Album> albums = new ArrayList<>();
-		List<Audiobook> books = new ArrayList<>();
-		List<Movie> movies = new ArrayList<>();
-		List<Order> orders = new ArrayList<>();
-		List<Patron> patrons = new ArrayList<>();
-		List<Librarian> librarians = new ArrayList<>();
+
+		int recordNum;
+		Map<Integer, Album> albums = new HashMap<Integer, Album>();
+		Map<Integer, Audiobook> audiobooks = new HashMap<Integer, Audiobook>();
+		Map<Integer, Movie> movies = new HashMap<Integer, Movie>();
+		Map<Integer, Order> orders = new HashMap<Integer, Order>();
+		Map<Integer, Patron> patrons = new HashMap<Integer, Patron>();
+		Map<Integer, Librarian> librarians = new HashMap<Integer, Librarian>();
 
 		while (true) {
 			int input = in.nextInt();
@@ -36,46 +38,52 @@ public class Main {
 				in.close();
 				System.exit(0);
 			case 1: 
-				int recordNum = recordInputOptions(in, "Please choose a record to add: ");
+				recordNum = recordInputOptions(in, "Please choose a record to add: ");
 				List<Object> list = new ArrayList<Object> ();
 
 				switch(recordNum){
-					case 1:
-						System.out.println();
-						list = itemAttributes(in, list);
-						list = albumAttributes(in, list);
-						Album album = new Album(list);
-						albums.add(album);
-						break;
-					case 2:
-						System.out.println();
-						list = itemAttributes(in, list);
-						list = bookAttributes(in, list);
-						Audiobook book  = new Audiobook(list);
-						books.add(book);
-						break;
-					case 3:
-						System.out.println();
-						list = itemAttributes(in, list);
-						list = movieAttributes(in, list);
-						Movie movie  = new Movie(list);
-						movies.add(movie);
-						break;
-					case 4:
-						System.out.println();
-						list = patronAttributes(in, list);
-						Patron patron  = new Patron(list);
-						patrons.add(patron);
-						break;
-					case 5:
-						System.out.println();
-						list = librarianAttributes(in, list);
-						Librarian librarian  = new Librarian(list);
-						librarians.add(librarian);
-						break;
-					default:
-						System.out.println("Invalid Input");
-						break;
+				case 1:
+					System.out.println();
+					list = itemAttributes(in, list);
+					list = albumAttributes(in, list);
+					Album album = new Album(list);
+					albums.put(album.itemNum, album);
+					break;
+				case 2:
+					System.out.println();
+					list = itemAttributes(in, list);
+					list = bookAttributes(in, list);
+					Audiobook book  = new Audiobook(list);
+					audiobooks.put(book.itemNum, book);
+					break;
+				case 3:
+					System.out.println();
+					list = itemAttributes(in, list);
+					list = movieAttributes(in, list);
+					Movie movie  = new Movie(list);
+					movies.put(movie.itemNum, movie);
+					break;
+				case 4:
+					System.out.println();
+					list = orderAttributes(in, list);
+					Order order  = new Order(list);
+					orders.put(order.orderNum, order);
+					break;
+				case 5:
+					System.out.println();
+					list = patronAttributes(in, list);
+					Patron patron  = new Patron(list);
+					patrons.put(patron.patronNum, patron);
+					break;
+				case 6:
+					System.out.println();
+					list = librarianAttributes(in, list);
+					Librarian librarian  = new Librarian(list);
+					librarians.put(librarian.librarianNum, librarian);
+					break;
+				default:
+					System.out.println("Invalid Input");
+					break;
 				}
 				break;
 			case 2:
@@ -92,7 +100,7 @@ public class Main {
 					}
 					break;
 				case 2:
-					Audiobook book = SearchRecords.searchAudiobook(in, books);
+					Audiobook book = SearchRecords.searchAudiobook(in, audiobooks);
 					if (book != null) {
 						System.out.println();
 						list2 = itemAttributes(in, list2);
@@ -139,7 +147,7 @@ public class Main {
 					SearchRecords.searchAlbum(in, albums);
 					break;
 				case 2:
-					SearchRecords.searchAudiobook(in, books);
+					SearchRecords.searchAudiobook(in, audiobooks);
 					break;
 				case 3:
 					SearchRecords.searchMovie(in, movies);
@@ -160,7 +168,7 @@ public class Main {
 				System.out.println();
 				list = orderAttributes(in, list4);
 				Order order  = new Order(list4);
-				orders.add(order);
+				orders.put(order.orderNum, order);
 				break;
 			case 5:
 				System.out.println("Getting report");
