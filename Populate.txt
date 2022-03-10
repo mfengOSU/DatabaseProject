@@ -1,0 +1,3 @@
+In Sqlite Studio, manually import the data from the 
+.csv files attached. Go to Tools -> Import to input
+.csv files to a specific table.
