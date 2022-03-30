@@ -8,7 +8,7 @@ import java.util.List;
 public class LibraryCard {
 	private static String INSERT = "INSERT INTO Library_Card VALUES (?, ?);";
 	private static String DELETE = "DELETE FROM Library_Card WHERE LibraryCardNo=?;";
-	private static String UPDATE = "UPDATE Library_Card SET LibraryCardNo=?, Active=? WHERE LibraryCardNo=?;";
+	private static String UPDATE = "UPDATE Library_Card SET Active=? WHERE LibraryCardNo=?;";
 
 	public static void insertIntoLibraryCard(Connection conn, List<Object> list) {
 		try {
@@ -32,6 +32,19 @@ public class LibraryCard {
     	} catch (SQLException e) {
     		System.out.println(e.getMessage());
     		System.out.println("Error with deleting library card from database");
+    	} 
+	}
+	
+	public static void updateLibraryCard(Connection conn, List<Object> list) {
+		try {
+    		PreparedStatement stmt = conn.prepareStatement(UPDATE);
+    		stmt.setBoolean(1, Boolean.valueOf(list.get(0).toString()));
+    		stmt.setInt(2, (int) list.get(1));
+    		stmt.executeUpdate();
+    		System.out.println("Successfully updated library card in database");  		
+    	} catch (SQLException e) {
+    		System.out.println(e.getMessage());
+    		System.out.println("Error with updating library card in database");
     	} 
 	}
 	

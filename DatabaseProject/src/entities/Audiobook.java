@@ -9,7 +9,7 @@ public class Audiobook {
 
 	private static String INSERT = "INSERT INTO Audiobook VALUES (?, ?, ?, ?, ?);";
 	private static String DELETE = "DELETE FROM Audiobook WHERE BookNo=?;";
-	private static String UPDATE = "UPDATE Audiobook SET BookNo=?, Length=?, Chapters=?, AuthorId=?, NarratorId=? WHERE BookNo=?;";
+	private static String UPDATE = "UPDATE Audiobook SET Length=?, Chapters=? WHERE BookNo=?;";
 
 	public static void insertIntoBook(Connection conn, List<Object> list) {
 		try {
@@ -35,6 +35,20 @@ public class Audiobook {
     	} catch (SQLException e) {
     		System.out.println(e.getMessage());
     		System.out.println("Error with deleting book from database");
+    	} 
+	}
+
+	public static void updateBook(Connection conn, List<Object> list) {
+		try {
+    		PreparedStatement stmt = conn.prepareStatement(UPDATE);
+    		stmt.setInt(1, (int) list.get(0));
+    		stmt.setInt(2, (int) list.get(1));
+    		stmt.setInt(3, (int) list.get(2));
+    		stmt.executeUpdate();
+    		System.out.println("Successfully updated book in database");  		
+    	} catch (SQLException e) {
+    		System.out.println(e.getMessage());
+    		System.out.println("Error with updating book in database");
     	} 
 	}
 	  

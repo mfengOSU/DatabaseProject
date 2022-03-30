@@ -8,7 +8,7 @@ import java.util.List;
 public class Narrator {
 	private static String INSERT = "INSERT INTO Narrator VALUES (?, ?);";
 	private static String DELETE = "DELETE FROM Narrator WHERE NarratorId=?;";
-	private static String UPDATE = "UPDATE Narrator SET NarratorId=?, Name=? WHERE NarratorId=?;";
+	private static String UPDATE = "UPDATE Narrator SET Name=? WHERE NarratorId=?;";
 
 	public static void insertIntoNarrator(Connection conn, List<Object> list) {
 		try {
@@ -32,6 +32,19 @@ public class Narrator {
     	} catch (SQLException e) {
     		System.out.println(e.getMessage());
     		System.out.println("Error with deleting narrator from database");
+    	} 
+	}
+	
+	public static void updateFromNarrator(Connection conn, List<Object> list) {
+		try {
+    		PreparedStatement stmt = conn.prepareStatement(UPDATE);
+    		stmt.setString(1, list.get(0).toString());
+    		stmt.setInt(2, (int) list.get(1));
+    		stmt.executeUpdate();
+    		System.out.println("Successfully updated narrator in database");  		
+    	} catch (SQLException e) {
+    		System.out.println(e.getMessage());
+    		System.out.println("Error with updated narrator in database");
     	} 
 	}
 	

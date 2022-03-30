@@ -8,7 +8,7 @@ import java.util.List;
 public class Album {
 	private static String INSERT = "INSERT INTO Album VALUES (?, ?);";
 	private static String DELETE = "DELETE FROM Album WHERE AlbumNo=?;";
-	private static String UPDATE = "UPDATE Album SET AlbumNo=?, ArtistId=? WHERE AlbumNo=?;";
+	//private static String UPDATE = "UPDATE Album SET AlbumNo=?, ArtistId=? WHERE AlbumNo=?;";
 
 	public static void insertIntoAlbum(Connection conn, List<Object> list) {
 		try {

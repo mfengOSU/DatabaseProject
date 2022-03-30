@@ -8,16 +8,13 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.*;
-import entities.*;
 
 public class Main {
 	/**
 	 *  Database file name
 	 */
 	private static String DATABASE = "libraryMedia.db";
-	
-	private static String sql = "";
-	
+		
 	 /**
      * Connects to the database if it exists, creates it if it does not, and returns the connection object.
      * 
@@ -118,10 +115,12 @@ public class Main {
 				DeleteRecords.deleteARecord(conn, in, recordNum);
 				break;
 			case 3:
-				recordNum = PromptInput.recordInputOptions(in, "Please choose a record to update: ");
+				recordNum = PromptInput.recordUpdateOptions(in, "Please choose a record to update: ");
+				EditRecords.editARecord(conn, in, recordNum);
 				break;
 			case 4:
 				recordNum = PromptInput.recordInputOptions(in, "Please choose a record to search for: ");
+			
 				break;
 			case 5:
 				recordNum = PromptInput.orderOptions(in, "Choose an item to order from library: ");

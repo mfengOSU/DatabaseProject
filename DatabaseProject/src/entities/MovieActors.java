@@ -8,7 +8,7 @@ import java.util.List;
 public class MovieActors {
 	private static String INSERT = "INSERT INTO Movie_Actors VALUES (?, ?);";
 	private static String DELETE = "DELETE FROM Movie_Actors WHERE ActorId=? AND MovieNo=?;";
-	private static String UPDATE = "UPDATE Movie_Actors SET ActorId=?, MovieNo=? WHERE ActorId=? AND MovieNo=?;";
+	//private static String UPDATE = "UPDATE Movie_Actors SET ActorId=?, MovieNo=? WHERE ActorId=? AND MovieNo=?;";
 
 	public static void insertIntoMovieActors(Connection conn, List<Object> list) {
 		try {

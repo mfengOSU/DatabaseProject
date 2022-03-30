@@ -8,7 +8,7 @@ import java.util.List;
 public class Library {
 	private static String INSERT = "INSERT INTO Library VALUES (?, ?);";
 	private static String DELETE = "DELETE FROM Library WHERE City=? AND State=?;";
-	private static String UPDATE = "UPDATE Library SET City=?, State=? WHERE City=? AND State=?;";
+	//private static String UPDATE = "UPDATE Library SET City=?, State=? WHERE City=? AND State=?;";
 
 	public static void insertIntoLibrary(Connection conn, List<Object> list) {
 		try {
