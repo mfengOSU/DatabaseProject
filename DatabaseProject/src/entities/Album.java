@@ -1,47 +1,38 @@
 package entities;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Album {
+	private static String INSERT = "INSERT INTO Album VALUES (?, ?);";
+	private static String DELETE = "DELETE FROM Album WHERE AlbumNo=?;";
+	private static String UPDATE = "UPDATE Album SET AlbumNo=?, ArtistId=? WHERE AlbumNo=?;";
 
-	public int itemNum;
-	public String itemStatus;
-	public String type;
-	public String title;
-	public int year;
-	public String genre;
-	public String location;
-	public String rating;
-	
-	public Artist artist;
-	public Track track;
-	
-    public Album(List<Object> list)
-    {
-        init(list);
-        
-    }
-
-	public void init(List<Object> list) {
-		itemNum = (int) list.get(0);
-        itemStatus = list.get(1).toString();
-        type = list.get(2).toString();
-        title = list.get(3).toString();
-        year = (int) list.get(4);
-        genre = list.get(5).toString();
-        location = list.get(6).toString();
-        rating = list.get(7).toString();
-        
-        artist = new Artist(list.get(8).toString(), (int)list.get(9));
-        track = new Track(list.get(10).toString(), (double)list.get(11));
+	public static void insertIntoAlbum(Connection conn, List<Object> list) {
+		try {
+    		PreparedStatement stmt = conn.prepareStatement(INSERT);
+    		stmt.setInt(1, (int) list.get(0));
+    		stmt.setInt(2, (int) list.get(1));
+    		stmt.executeUpdate();
+    		System.out.println("Successfully inserted new album into database");  		
+    	} catch (SQLException e) {
+    		System.out.println(e.getMessage());
+    		System.out.println("Error with inserting new album into database");
+    	} 
 	}
-
-	@Override
-	public String toString() {
-		return "Album [itemNum=" + itemNum + ", itemStatus=" + itemStatus + ", type=" + type + ", title=" + title
-				+ ", year=" + year + ", genre=" + genre + ", location=" + location + ", rating=" + rating + ", artist="
-				+ artist + ", track=" + track + "]";
+	
+	public static void deleteFromAlbum(Connection conn, List<Object> list) {
+		try {
+    		PreparedStatement stmt = conn.prepareStatement(DELETE);
+    		stmt.setInt(1, (int) list.get(0));
+    		stmt.executeUpdate();
+    		System.out.println("Successfully deleted album from database");  		
+    	} catch (SQLException e) {
+    		System.out.println(e.getMessage());
+    		System.out.println("Error with deleting album from database");
+    	} 
 	}
-    
-
+	
 }

@@ -1,35 +1,40 @@
 package entities;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
+
 public class Library {
-	private String state;
-	private String city;
+	private static String INSERT = "INSERT INTO Library VALUES (?, ?);";
+	private static String DELETE = "DELETE FROM Library WHERE City=? AND State=?;";
+	private static String UPDATE = "UPDATE Library SET City=?, State=? WHERE City=? AND State=?;";
+
+	public static void insertIntoLibrary(Connection conn, List<Object> list) {
+		try {
+    		PreparedStatement stmt = conn.prepareStatement(INSERT);
+    		stmt.setString(1, list.get(0).toString());
+    		stmt.setString(2, list.get(1).toString());
+    		stmt.executeUpdate();
+    		System.out.println("Successfully inserted new library into database");  		
+    	} catch (SQLException e) {
+    		System.out.println(e.getMessage());
+    		System.out.println("Error with inserting new library into database");
+    	} 
+	}
 	
-	public Library(String city, String state) {
-		this.state = state;
-		this.city = city;
+	public static void deleteFromLibrary(Connection conn, List<Object> list) {
+		try {
+    		PreparedStatement stmt = conn.prepareStatement(DELETE);
+    		stmt.setString(1, list.get(0).toString());
+    		stmt.setString(2, list.get(1).toString());
+    		stmt.executeUpdate();
+    		System.out.println("Successfully deleted library from database");  		
+    	} catch (SQLException e) {
+    		System.out.println(e.getMessage());
+    		System.out.println("Error with deleting library from database");
+    	} 
 	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	@Override
-	public String toString() {
-		return "Library [state=" + state + ", city=" + city + "]";
-	}	
-	
 	
 	
 }

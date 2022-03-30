@@ -1,27 +1,42 @@
 package entities;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Librarian {
+	private static String INSERT = "INSERT INTO Librarian VALUES (?, ?, ?, ?, ?);";
+	private static String DELETE = "DELETE FROM Librarian WHERE LibrarianId=?;";
+	private static String UPDATE = "UPDATE Librarian SET LibrarianId=?, City=?, State=?, Name=?, Salary=? WHERE LibrarianId=?;";
 
-    public int librarianNum;
-    public String name;
-    public double salary;
+	public static void insertIntoLibrarian(Connection conn, List<Object> list) {
+		try {
+    		PreparedStatement stmt = conn.prepareStatement(INSERT);
+    		stmt.setInt(1, (int) list.get(0));
+    		stmt.setString(2, list.get(1).toString());
+    		stmt.setString(3, list.get(2).toString());
+    		stmt.setString(4, list.get(3).toString());
+    		stmt.setDouble(5, Double.parseDouble(list.get(4).toString()));
+    		stmt.executeUpdate();
+    		System.out.println("Successfully inserted new Librarian into database");  		
+    	} catch (SQLException e) {
+    		System.out.println(e.getMessage());
+    		System.out.println("Error with inserting new Librarian into database");
+    	} 
+	}
 	
-	public Librarian(List<Object> list)
-    {
-        init(list);
-    }
-
-	public void init(List<Object> list) {
-		librarianNum = (int)list.get(0);
-        name = list.get(1).toString();
-        salary = (double)list.get(2);
+	public static void deleteFromLibrarian(Connection conn, List<Object> list) {
+		try {
+    		PreparedStatement stmt = conn.prepareStatement(DELETE);
+    		stmt.setInt(1, (int) list.get(0));
+    		stmt.executeUpdate();
+    		System.out.println("Successfully deleted Librarian from database");  		
+    	} catch (SQLException e) {
+    		System.out.println(e.getMessage());
+    		System.out.println("Error with deleting librarian from database");
+    	} 
 	}
-
-	@Override
-	public String toString() {
-		return "Librarian [librarianNum=" + librarianNum + ", name=" + name + ", salary=" + salary + "]";
-	}
+	
 
 }

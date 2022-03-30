@@ -1,19 +1,42 @@
 package entities;
-	
-public class Actor {
-	
-	public String actorName;
-	public int actorId;
-	
-	public Actor(String n, int id)
-	{
-		actorName = n;
-		actorId = id;
-	}
 
-	@Override
-	public String toString() {
-		return "Actor [actorName=" + actorName + ", actorId=" + actorId + "]";
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
+
+public class Actor {
+	private static String INSERT = "INSERT INTO Actor VALUES (?, ?);";
+	private static String DELETE = "DELETE FROM Actor WHERE ActorId=?;";
+	private static String UPDATE = "UPDATE Actor SET ActorId=?, Name=? WHERE ActorId=?;";
+
+	public static void insertIntoActor(Connection conn, List<Object> list) {
+		try {
+    		PreparedStatement stmt = conn.prepareStatement(INSERT);
+    		stmt.setInt(1, (int) list.get(0));
+    		stmt.setString(2, list.get(1).toString());
+    		stmt.executeUpdate();
+    		System.out.println("Successfully inserted new actor into database");  		
+    	} catch (SQLException e) {
+    		System.out.println(e.getMessage());
+    		System.out.println("Error with inserting new actor into database");
+    	} 
+	}
+	
+	public static void deleteFromActor(Connection conn, List<Object> list) {
+		try {
+    		PreparedStatement stmt = conn.prepareStatement(DELETE);
+    		stmt.setInt(1, (int) list.get(0));
+    		stmt.executeUpdate();
+    		System.out.println("Successfully deleted actor from database");  		
+    	} catch (SQLException e) {
+    		System.out.println(e.getMessage());
+    		System.out.println("Error with deleting actor from database");
+    	} 
+	}
+	
+	public static void updateFromActor(Connection conn, List<Object> list) {
+		
 	}
 	
 }
