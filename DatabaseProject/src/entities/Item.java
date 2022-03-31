@@ -7,7 +7,7 @@ import java.sql.Types;
 import java.util.List;
 
 public class Item {
-	private static String INSERT = "INSERT INTO Item VALUES (?, ?, ?, ?, ?, ?, NULL, NULL);";
+	private static String INSERT = "INSERT INTO Item VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 	private static String DELETE = "DELETE FROM Item WHERE ItemNo=?;";
 	private static String UPDATE = "UPDATE Item SET Type=?, Rating=?, Title=?, Year=?, Genre=?, Location=? WHERE ItemNo=?;";
 
@@ -20,7 +20,8 @@ public class Item {
     		stmt.setString(4, String.valueOf(list.get(3)));
     		stmt.setInt(5, (int) list.get(4));
     		stmt.setString(6, String.valueOf(list.get(5)));
-    		
+    		stmt.setNull(7, Types.NULL);
+    		stmt.setNull(8, Types.NULL);
     		stmt.executeUpdate();
     		System.out.println("Successfully inserted new item into database");  		
     	} catch (SQLException e) {
