@@ -10,6 +10,7 @@ public class Patron {
 	private static String INSERT = "INSERT INTO Patron VALUES (?, ?, ?, ?, ?, ?);";
 	private static String DELETE = "DELETE FROM Patron WHERE PatronId=?;";
 	private static String UPDATE = "UPDATE Patron SET FName=?, LName=?, Address=?, Email=? WHERE PatronId=?;";
+	private static String SEARCH = "SELECT * FROM Patron WHERE PatronId=?";
 
 	public static void insertIntoPatron(Connection conn, List<Object> list) {
 		try {

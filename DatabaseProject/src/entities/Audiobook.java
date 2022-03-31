@@ -10,6 +10,7 @@ public class Audiobook {
 	private static String INSERT = "INSERT INTO Audiobook VALUES (?, ?, ?, ?, ?);";
 	private static String DELETE = "DELETE FROM Audiobook WHERE BookNo=?;";
 	private static String UPDATE = "UPDATE Audiobook SET Length=?, Chapters=? WHERE BookNo=?;";
+	private static String SEARCH = "SELECT Item.Title FROM Audiobook, Item WHERE Item.ItemNo=Audiobook.BookNo AND Audiobook.BookNo = ?;";
 
 	public static void insertIntoBook(Connection conn, List<Object> list) {
 		try {

@@ -9,6 +9,7 @@ public class LibraryCard {
 	private static String INSERT = "INSERT INTO Library_Card VALUES (?, ?);";
 	private static String DELETE = "DELETE FROM Library_Card WHERE LibraryCardNo=?;";
 	private static String UPDATE = "UPDATE Library_Card SET Active=? WHERE LibraryCardNo=?;";
+	private static String SEARCH = "SELECT LibraryCardNo FROM Library_Card WHERE Active=?";
 
 	public static void insertIntoLibraryCard(Connection conn, List<Object> list) {
 		try {

@@ -9,6 +9,7 @@ public class Movie {
 	private static String INSERT = "INSERT INTO Movie VALUES (?, ?, ?);";
 	private static String DELETE = "DELETE FROM Movie WHERE MovieNo=?;";
 	private static String UPDATE = "UPDATE Movie SET Length=?, Director=? WHERE MovieNo=?;";
+	private static String SEARCH = "SELECT Item.Title FROM Movie, Item WHERE Item.ItemNo=Movie.MovieNo AND Movie.MovieNo = ?;";
 
 	public static void insertIntoMovie(Connection conn, List<Object> list) {
 		try {

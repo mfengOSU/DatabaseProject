@@ -1,93 +1,123 @@
 package ui;
 
+import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
-import entities.*;
-
 public class SearchRecords {
-//	public static Movie searchMovie(Scanner in, Map<Integer, Movie> records) {
-//		System.out.println("Input movie title to search for");
-//		String movieInput = in.nextLine();
-//		
-//		for (Movie item : records.values()) {
-//				if (item.title.equalsIgnoreCase(movieInput)) {
-//					System.out.println("Movie found: " + item);
-//					return item;
-//				}
-//				
-//		}
-//		
-//		System.out.println("No movie found with title " + movieInput);
-//		return null;
-//	}
-//	
-//	public static Album searchAlbum(Scanner in, Map<Integer, Album> records) {
-//		System.out.println("Input album title to search for");
-//		String input = in.nextLine();
-//		
-//		for (Album item : records.values()) {
-//				if (item.title.equalsIgnoreCase(input)) {
-//					System.out.println("Album found: " + item);
-//					return item;
-//				}
-//				
-//		}
-//		
-//		System.out.println("No album found with title " + input);
-//		return null;
-//	}
-//	
-//
-//	public static Audiobook searchAudiobook(Scanner in, Map<Integer, Audiobook> records) {
-//		System.out.println("Input Audiobook title to search for");
-//		String input = in.nextLine();
-//		
-//		for (Audiobook item : records.values()) {
-//				if (item.title.equalsIgnoreCase(input)) {
-//					System.out.println("Audiobook found: " + item);
-//					return item;
-//				}
-//				
-//		}
-//		
-//		System.out.println("No Audiobook found with title " + input);
-//		return null;
-//		
-//	}
-//	
-//	public static Patron searchPatron(Scanner in, Map<Integer,Patron> records) {
-//		System.out.println("Input Patron last name to search for");
-//		String input = in.nextLine();
-//		
-//		for (Patron item : records.values()) {
-//				if (item.lastName.equalsIgnoreCase(input)) {
-//					System.out.println("Patron found: " + item);
-//					return item;
-//				}
-//				
-//		}
-//		
-//		System.out.println("No Patron found with last name " + input);
-//		return null;
-//		
-//	}
-//	
-//	public static Librarian searchLibrarian(Scanner in, Map<Integer,Librarian> records) {
-//		System.out.println("Input Librarian name to search for");
-//		String input = in.nextLine();
-//		
-//		for (Librarian item : records.values()) {
-//				if (item.name.equalsIgnoreCase(input)) {
-//					System.out.println("Librarian found: " + item);
-//					return item;
-//				}
-//				
-//		}
-//		
-//		System.out.println("No Librarian found with title " + input);
-//		return null;
-//		
-//	}
+	public static void addARecord(Connection conn, Scanner in, int recordNum) {
+		List<Object> list = new ArrayList<Object> ();
+		
+		switch(recordNum){
+		case 1: //Artist
+			System.out.println();
+			System.out.println("Enter artist id to search for: ");
+			list.add(in.nextInt());
+			in.nextLine();
+			
+			break;
+		case 2: //Album
+			System.out.println();	
+			System.out.println("Enter album number to search for: ");
+			list.add(in.nextInt());
+			in.nextLine();
+			
+			break;
+		case 3: //Track
+			System.out.println();
+			System.out.println();	
+			System.out.println("Enter track length to get tracks with length smaller than input: ");
+			list.add(in.nextInt());
+			in.nextLine();
+			
+			break;
+		case 4: //Actor
+			System.out.println();
+			System.out.println("Enter actor id to search for: ");
+			list.add(in.nextInt());
+			in.nextLine();
+			
+			break;
+		case 5: //Movie
+			System.out.println();
+			System.out.println("Enter movie number to search for: ");
+			list.add(in.nextInt());
+			in.nextLine();
+			
+			break;
+		case 6: //Actor's movies
+			System.out.println();
+			System.out.println("Enter movie number to get all actors in the movie: ");
+			list.add(in.nextInt());
+			in.nextLine();
+
+			break;
+		case 7: //Author
+			System.out.println();
+			System.out.println("Enter author id to search for: ");
+			list.add(in.nextInt());
+			in.nextLine();
+			
+			break;
+		case 8: //Narrator
+			System.out.println();
+			System.out.println("Enter narrator id to search for: ");
+			list.add(in.nextInt());
+			in.nextLine();
+			
+			break;
+		case 9: //book
+			System.out.println();
+			System.out.println("Enter book number to search for: ");
+			list.add(in.nextInt());
+			in.nextLine();
+			
+			break;
+		case 10: //patron
+			System.out.println();
+			System.out.println("Enter patron id to search for: ");
+			list.add(in.nextInt());
+			in.nextLine();
+			
+			break;
+		case 11: //library card
+			System.out.println();
+			System.out.println("Enter true or false to get all library cards that are active or inactive: ");
+			list.add(in.nextBoolean());
+			in.nextLine();
+			
+			break;
+		case 12: //patron's returns
+			System.out.println();
+			System.out.println("Enter item number to get item title of a returned item: ");
+			list.add(in.nextInt());
+			in.nextLine();
+			
+			break;
+		case 13: //patron's checkouts
+			System.out.println();
+			System.out.println("Enter item number to get due date of checked out item: ");
+			list.add(in.nextInt());
+			in.nextLine();
+			
+			break;
+		case 14: //library
+			System.out.println();
+			System.out.println("Enter a state to get all libraries in that state: ");
+			list.add(in.nextLine());
+			
+			break;
+		case 15: //librarian
+			System.out.println();
+			System.out.println("Enter salary to get all librarians with greater salary: ");
+			list.add(in.nextDouble());
+			in.nextLine();
+			
+			break;
+		default:
+			System.out.println("Invalid Input");
+			break;
+		}
+	}
 }

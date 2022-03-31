@@ -9,6 +9,8 @@ public class Author {
 	private static String INSERT = "INSERT INTO Author VALUES (?, ?);";
 	private static String DELETE = "DELETE FROM Author WHERE AuthorId=?;";
 	private static String UPDATE = "UPDATE Author SET Name=? WHERE AuthorId=?;";
+	private static String SEARCH = "SELECT Name FROM Author WHERE AuthorId=?";
+
 
 	public static void insertIntoAuthor(Connection conn, List<Object> list) {
 		try {

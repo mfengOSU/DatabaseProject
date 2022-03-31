@@ -9,6 +9,7 @@ public class Narrator {
 	private static String INSERT = "INSERT INTO Narrator VALUES (?, ?);";
 	private static String DELETE = "DELETE FROM Narrator WHERE NarratorId=?;";
 	private static String UPDATE = "UPDATE Narrator SET Name=? WHERE NarratorId=?;";
+	private static String SEARCH = "SELECT Name FROM Narrator WHERE NarratorId=?";
 
 	public static void insertIntoNarrator(Connection conn, List<Object> list) {
 		try {

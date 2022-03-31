@@ -10,6 +10,7 @@ public class PatronCheckouts {
 	private static String INSERT = "INSERT INTO Patron_Checkouts VALUES (?, ?, ?);";
 	private static String DELETE = "DELETE FROM Patron_Checkouts WHERE PatronId=? AND ItemNo=?;";
 	private static String UPDATE = "UPDATE Patron_Checkouts SET DueDate=? WHERE PatronId=? AND ItemNo=?;";
+	private static String SEARCH = "SELECT DueDate FROM Patron_Checkouts, Item WHERE Patron_Checkouts.ItemNo=Item.ItemNo AND Item.ItemNo=?";
 
 	public static void insertIntoPatronCheckouts(Connection conn, List<Object> list) {
 		try {

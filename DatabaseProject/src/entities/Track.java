@@ -9,6 +9,7 @@ public class Track {
 	private static String INSERT = "INSERT INTO Track VALUES (?, ?, ?);";
 	private static String DELETE = "DELETE FROM Track WHERE AlbumNo=? AND Title=?;";
 	private static String UPDATE = "UPDATE Track SET Title=?, Length=? WHERE AlbumNo=? AND Title=?;";
+	private static String SEARCH = "SELECT Track.Title FROM Track, Album WHERE Album.AlbumNo=Track.AlbumNo AND Track.Length <= ?";
 
 	public static void insertIntoTrack(Connection conn, List<Object> list) {
 		try {

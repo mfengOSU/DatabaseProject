@@ -9,7 +9,8 @@ public class Librarian {
 	private static String INSERT = "INSERT INTO Librarian VALUES (?, ?, ?, ?, ?);";
 	private static String DELETE = "DELETE FROM Librarian WHERE LibrarianId=?;";
 	private static String UPDATE = "UPDATE Librarian SET City=?, State=?, Name=?, Salary=? WHERE LibrarianId=?;";
-
+	private static String SEARCH = "SELECT Name FROM Librarian WHERE Salary>=?";
+	
 	public static void insertIntoLibrarian(Connection conn, List<Object> list) {
 		try {
     		PreparedStatement stmt = conn.prepareStatement(INSERT);

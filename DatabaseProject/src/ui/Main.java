@@ -80,6 +80,40 @@ public class Main {
     		System.out.println(e.getMessage());
     	}
     }
+    
+    public static void searchRecord(Connection conn, String tableName) {
+  		String sql = "SELECT * FROM " + tableName + ";";
+      	if (tableName.equalsIgnoreCase("Album")) {
+      		sql = "SELECT * FROM Album, Item WHERE Item.ItemNo=Album.AlbumNo;";
+      	} else if (tableName.equalsIgnoreCase("Movie")) {
+      		sql = "SELECT * FROM Movie, Item WHERE Item.ItemNo=Movie.MovieNo;";
+      	} else if (tableName.equalsIgnoreCase("Audiobook")) {
+      		sql = "SELECT * FROM Audiobook, Item WHERE Item.ItemNo=Audiobook.BookNo;";
+      	}
+      	try {
+      		PreparedStatement stmt = conn.prepareStatement(sql);
+      		ResultSet rSet = stmt.executeQuery();
+      		ResultSetMetaData rsmd = rSet.getMetaData();
+          	int columnCount = rsmd.getColumnCount();
+          	for (int i = 1; i <= columnCount; i++) {
+          		String value = rsmd.getColumnName(i);
+          		System.out.print(value);
+          		if (i < columnCount) System.out.print(",  ");
+          	}
+  			System.out.print("\n");
+      		while (rSet.next()) {
+      			for (int i = 1; i <= columnCount; i++) {
+          			String columnValue = rSet.getString(i);
+              		System.out.print(columnValue);
+              		if (i < columnCount) System.out.print(",  ");
+          		}
+      			System.out.println("\n");
+      		}
+      	} catch (SQLException e) {
+      		System.out.println(e.getMessage());
+      	}
+      }
+    
 	
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);	
