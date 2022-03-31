@@ -2,6 +2,7 @@ package entities;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class Patron {
 	private static String INSERT = "INSERT INTO Patron VALUES (?, ?, ?, ?, ?, ?);";
 	private static String DELETE = "DELETE FROM Patron WHERE PatronId=?;";
 	private static String UPDATE = "UPDATE Patron SET FName=?, LName=?, Address=?, Email=? WHERE PatronId=?;";
-	private static String SEARCH = "SELECT * FROM Patron WHERE PatronId=?";
+	private static String SEARCH = "SELECT FName, LName, Email, Address FROM Patron WHERE PatronId=?";
 
 	public static void insertIntoPatron(Connection conn, List<Object> list) {
 		try {
@@ -56,6 +57,22 @@ public class Patron {
     		System.out.println(e.getMessage());
     		System.out.println("Error with updating patron into database");
     	} 
+	}
+	
+	public static void search(Connection conn, List<Object> list) {
+		try {
+			PreparedStatement stmt = conn.prepareStatement(SEARCH);
+			stmt.setInt(1, (int) list.get(0));
+			ResultSet rSet = stmt.executeQuery();
+			while (rSet.next()) {
+				System.out.println(rSet.getString("FName") + " " + rSet.getString("LName")
+				+ ", Email: " + rSet.getString("Email") + ", Address: " + rSet.getString("Address"));
+				
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("Error with searching records");
+		}
 	}
 
 }

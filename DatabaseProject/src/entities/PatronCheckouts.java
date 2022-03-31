@@ -3,7 +3,10 @@ package entities;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class PatronCheckouts {
@@ -17,7 +20,7 @@ public class PatronCheckouts {
     		PreparedStatement stmt = conn.prepareStatement(INSERT);
     		stmt.setInt(1, (int) list.get(0));
     		stmt.setInt(2, (int) list.get(1));
-    		stmt.setDate(3, Date.valueOf(list.get(2).toString()));
+    		stmt.setString(3, list.get(2).toString());
     		stmt.executeUpdate();
     		System.out.println("Successfully inserted new patron checkout item into database");  		
     	} catch (SQLException e) {
@@ -50,6 +53,20 @@ public class PatronCheckouts {
     		System.out.println(e.getMessage());
     		System.out.println("Error with  updating patron checkout item into database");
     	} 
+	}
+	
+	public static void search(Connection conn, List<Object> list) {
+		try {
+			PreparedStatement stmt = conn.prepareStatement(SEARCH);
+			stmt.setInt(1, (int) list.get(0));
+			ResultSet rSet = stmt.executeQuery();
+			while (rSet.next()) {
+				System.out.println(new SimpleDateFormat("yyyy-MM-dd").parse(rSet.getString("DueDate")));
+			}
+		} catch (SQLException | ParseException e) {
+			System.out.println(e.getMessage());
+			System.out.println("Error with searching records");
+		}
 	}
 
 }

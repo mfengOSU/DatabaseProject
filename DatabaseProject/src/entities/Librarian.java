@@ -2,6 +2,7 @@ package entities;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -53,6 +54,20 @@ public class Librarian {
     		System.out.println(e.getMessage());
     		System.out.println("Error with updated librarian in database");
     	} 
+	}
+	
+	public static void search(Connection conn, List<Object> list) {
+		try {
+			PreparedStatement stmt = conn.prepareStatement(SEARCH);
+			stmt.setDouble(1, (Double) list.get(0));
+			ResultSet rSet = stmt.executeQuery();
+			while (rSet.next()) {
+				System.out.println(rSet.getString("Name"));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("Error with searching records");
+		}
 	}
 	
 

@@ -2,6 +2,7 @@ package entities;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -47,6 +48,20 @@ public class LibraryCard {
     		System.out.println(e.getMessage());
     		System.out.println("Error with updating library card in database");
     	} 
+	}
+	
+	public static void search(Connection conn, List<Object> list) {
+		try {
+			PreparedStatement stmt = conn.prepareStatement(SEARCH);
+			stmt.setBoolean(1, (Boolean) list.get(0));
+			ResultSet rSet = stmt.executeQuery();
+			while (rSet.next()) {
+				System.out.println(rSet.getInt("LibraryCardNo"));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("Error with searching records");
+		}
 	}
 	
 }

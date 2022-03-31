@@ -2,6 +2,7 @@ package entities;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -35,6 +36,20 @@ public class Library {
     		System.out.println(e.getMessage());
     		System.out.println("Error with deleting library from database");
     	} 
+	}
+	
+	public static void search(Connection conn, List<Object> list) {
+		try {
+			PreparedStatement stmt = conn.prepareStatement(SEARCH);
+			stmt.setString(1, list.get(0).toString());
+			ResultSet rSet = stmt.executeQuery();
+			while (rSet.next()) {
+				System.out.println(rSet.getString("City") + ", " + rSet.getString("State"));
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("Error with searching records");
+		}
 	}
 	
 	

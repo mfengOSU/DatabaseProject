@@ -89,6 +89,7 @@ public class Main {
 		Connection conn = initializeDB(DATABASE);
 
 		while (!quit) {
+			System.out.println();
 			System.out.println("Library Application");
 			System.out.println("Choose an option");
 			System.out.println("0 - Exit");
