@@ -23,9 +23,18 @@ public class Order {
 			if (nonOrdered.size() == 0) {
 				System.out.println("All items already ordered");
 			} else {
+				System.out.println("Possible Item numbers: ");
+
 				for (int item : nonOrdered) {
 					System.out.print(item + ", ");
 				}
+
+				System.out.println();
+				System.out.println();
+				System.out.println("Possible Cities and States: ");
+				Main.queryAllRows(conn, "Library");
+
+
 				orderList = PromptInput.orderAttributes(in);
 				LibraryOrder.insertIntoLibraryOrder(conn, orderList);
 				updateItemStatus(conn, "ORDER", (int)orderList.get(0));
@@ -37,9 +46,17 @@ public class Order {
 			if (nonOrdered.size() == 0) {
 				System.out.println("All items already ordered");
 			} else {
+				System.out.println("Possible Item numbers: ");
+
 				for (int item : nonOrdered) {
 					System.out.print(item + ", ");
 				}
+				System.out.println();
+				System.out.println();
+				System.out.println("Possible Cities and States: ");
+				Main.queryAllRows(conn, "Library");
+			
+
 				orderList = PromptInput.orderAttributes(in);
 				LibraryOrder.insertIntoLibraryOrder(conn, orderList);
 				updateItemStatus(conn, "ORDER", (int)orderList.get(0));
@@ -50,9 +67,18 @@ public class Order {
 			if (nonOrdered.size() == 0) {
 				System.out.println("All items already ordered");
 			} else {
+				System.out.println("Possible Item numbers: ");
+
 				for (int item : nonOrdered) {
 					System.out.print(item + ", ");
 				}
+				System.out.println();
+				System.out.println();
+				
+				System.out.println("Possible Cities and States: ");
+				Main.queryAllRows(conn, "Library");
+		
+
 				orderList = PromptInput.orderAttributes(in);
 				LibraryOrder.insertIntoLibraryOrder(conn, orderList);
 				updateItemStatus(conn, "ORDER", (int)orderList.get(0));
@@ -113,11 +139,11 @@ public class Order {
 	private static List<Integer> getNonOrderedItems(Connection conn, String tableName) {
 		String sql = "";
 		if (tableName.equalsIgnoreCase("Album")) {
-    		sql = "SELECT * FROM Album, Item WHERE Item.ItemNo=Album.AlbumNo AND (Item.Status!=\'INVENTORY\' AND Item.Status!=\'ORDER\');";
+    		sql = "SELECT * FROM Album, Item WHERE Item.ItemNo=Album.AlbumNo AND Item.Status is NULL;";
     	} else if (tableName.equalsIgnoreCase("Movie")) {
-    		sql = "SELECT * FROM Movie, Item WHERE Item.ItemNo=Movie.MovieNo AND (Item.Status!=\'INVENTORY\' AND Item.Status!=\'ORDER\');";
+    		sql = "SELECT * FROM Movie, Item WHERE Item.ItemNo=Movie.MovieNo AND Item.Status is NULL;";
     	} else if (tableName.equalsIgnoreCase("Audiobook")) {
-    		sql = "SELECT * FROM Audiobook, Item WHERE Item.ItemNo=Audiobook.BookNo AND (Item.Status!=\'INVENTORY\' AND Item.Status!=\'ORDER\');";
+    		sql = "SELECT * FROM Audiobook, Item WHERE Item.ItemNo=Audiobook.BookNo AND Item.Status is NULL;";
     	}
 		List<Integer> list = new ArrayList<>();
 		try {
