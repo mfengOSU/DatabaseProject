@@ -1,12 +1,10 @@
 package entities;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 import java.util.List;
 
 public class PatronCheckouts {
@@ -44,7 +42,7 @@ public class PatronCheckouts {
 		try {
     		PreparedStatement stmt = conn.prepareStatement(UPDATE);
 
-    		stmt.setDate(1, Date.valueOf(list.get(0).toString()));
+    		stmt.setString(1, list.get(0).toString());
     		stmt.setInt(2, (int) list.get(1));
     		stmt.setInt(3, (int) list.get(2));
     		stmt.executeUpdate();
@@ -61,9 +59,9 @@ public class PatronCheckouts {
 			stmt.setInt(1, (int) list.get(0));
 			ResultSet rSet = stmt.executeQuery();
 			while (rSet.next()) {
-				System.out.println(new SimpleDateFormat("yyyy-MM-dd").parse(rSet.getString("DueDate")));
+				System.out.println(rSet.getString("DueDate"));
 			}
-		} catch (SQLException | ParseException e) {
+		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 			System.out.println("Error with searching records");
 		}

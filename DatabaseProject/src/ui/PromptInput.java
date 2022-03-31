@@ -340,7 +340,7 @@ public class PromptInput {
 		in.nextLine();
 		System.out.println();
 		
-		System.out.print("Due Date (yyyy-mm-dd): ");
+		System.out.print("Due Date (MM/dd/yy): ");
 		list.add(in.nextLine());
 		System.out.println();
 
@@ -425,7 +425,7 @@ public class PromptInput {
 		list.add(in.nextLine());
 		System.out.println();
 		
-		System.out.print("Arrival Date (yyyy-mm-dd): ");
+		System.out.print("Arrival Date (MM/dd/yy): ");
 		list.add(in.nextLine());
 		System.out.println();
 		

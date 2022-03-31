@@ -1,7 +1,6 @@
 package entities;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
@@ -17,7 +16,7 @@ public class LibraryOrder {
     		stmt.setInt(1, (int) list.get(0));
     		stmt.setString(2, list.get(1).toString());
     		stmt.setString(3, list.get(2).toString());
-    		stmt.setDate(4, Date.valueOf(list.get(3).toString()));
+    		stmt.setString(4, list.get(3).toString());
     		stmt.setDouble(5, Double.parseDouble(list.get(4).toString()));
     		stmt.setInt(6, (int) list.get(5));
     		stmt.executeUpdate();
@@ -46,7 +45,7 @@ public class LibraryOrder {
 		try {
     		PreparedStatement stmt = conn.prepareStatement(UPDATE);
     
-    		stmt.setDate(1, Date.valueOf(list.get(0).toString()));
+    		stmt.setString(1, list.get(0).toString());
     		stmt.setDouble(2, Double.parseDouble(list.get(1).toString()));
     		stmt.setInt(3, (int) list.get(2));
     		stmt.setInt(4, (int) list.get(3));
