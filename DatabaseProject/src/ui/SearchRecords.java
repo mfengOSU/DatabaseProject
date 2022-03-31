@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class SearchRecords {
-	public static void addARecord(Connection conn, Scanner in, int recordNum) {
+	public static void searchRecord(Connection conn, Scanner in, int recordNum) {
 		List<Object> list = new ArrayList<Object> ();
 		
 		switch(recordNum){

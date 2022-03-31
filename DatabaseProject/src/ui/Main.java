@@ -120,10 +120,11 @@ public class Main {
 				break;
 			case 4:
 				recordNum = PromptInput.recordInputOptions(in, "Please choose a record to search for: ");
-			
+				SearchRecords.searchRecord(conn, in, recordNum);
 				break;
 			case 5:
 				recordNum = PromptInput.orderOptions(in, "Choose an item to order from library: ");
+				Order.orderItem(conn, in, recordNum);
 				break;
 			case 6:
 				recordNum = PromptInput.reportOptions(in, "Choose report to print: ");
